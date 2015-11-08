@@ -1,1 +1,0 @@
-../third-party/string-format/index.js
