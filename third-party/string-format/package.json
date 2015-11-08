@@ -1,0 +1,33 @@
+{
+  "name": "string-format",
+  "version": "0.5.0",
+  "description": "String formatting inspired by Python's str.format()",
+  "author": "David Chambers <dc@davidchambers.me>",
+  "keywords": [
+    "string",
+    "formatting",
+    "language",
+    "util"
+  ],
+  "homepage": "https://github.com/davidchambers/string-format",
+  "bugs": "https://github.com/davidchambers/string-format/issues",
+  "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davidchambers/string-format.git"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json"
+  ],
+  "devDependencies": {
+    "istanbul": "0.3.x",
+    "jscs": "2.1.x",
+    "jshint": "2.8.x",
+    "mocha": "2.x.x",
+    "ramda": "0.8.x",
+    "xyz": "0.5.x"
+  }
+}
