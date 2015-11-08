@@ -1,0 +1,14 @@
+#! /bin/sh
+
+set -e
+
+git worktree add /tmp/gh-pages $1
+cd /tmp/gh-pages
+(cd clock; ./build)
+find . -name .gitignore -delete
+git add .
+git commit -m 'autogen'
+git branch -f gh-pages
+cd -
+rm -rf /tmp/gh-pages
+git worktree prune
