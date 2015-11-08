@@ -1,0 +1,15 @@
+{
+  "lang": "nl",
+  "name": "Clock Test",
+  "short_name": "Clock Test",
+  "scope": "/edu/clock/",
+  "start_url": "/edu/clock/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "white",
+  "background_color": "white",
+  "icons": [
+    {"src": "icon.svg", "type": "image/svg+xml"},
+    {"src": "icon.ico", "sizes": "16x16 32x32 48x48 64x64 144x144 196x196"}
+  ]
+}

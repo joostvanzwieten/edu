@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="144" height="144" viewBox="0 0 144 144" version="1.1"
+    xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(39,124)">
+    <!-- clock border -->
+    <circle fill="#fff" stroke="none" cx="0" cy="0" r="124"/>
+    <!-- clock border -->
+    <circle fill="none" stroke="#000" stroke-width="8" cx="0" cy="0" r="120"/>
+    <!-- big ticks -->
+    <g fill="none" stroke="#000" stroke-width="8">
+      <line x1="0" x2="0" y1="-90" y2="-110" transform="rotate(330)"/>
+      <line x1="0" x2="0" y1="-90" y2="-110"/>
+      <line x1="0" x2="0" y1="-90" y2="-110" transform="rotate( 30)"/>
+      <line x1="0" x2="0" y1="-90" y2="-110" transform="rotate( 60)"/>
+      <line x1="0" x2="0" y1="-90" y2="-110" transform="rotate( 90)"/>
+    </g>
+    <!-- small ticks -->
+    <g fill="none" stroke="#000" stroke-width="4">
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(336)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(342)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(348)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(354)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(  6)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 12)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 18)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 24)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 36)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 42)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 48)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 54)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 66)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 72)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 78)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 84)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate( 96)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(102)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(108)"/>
+      <line x1="0" x2="0" y1="-100" y2="-110" transform="rotate(114)"/>
+    </g>
+    <!-- hour hand -->
+    <g fill="#000" stroke="#000" transform="rotate(-26)">
+      <circle cx="0" cy="0" r="10"/>
+      <line fill="none" x1="0" x2="0" y1="0" y2="-55" stroke-width="8"/>
+    </g>
+    <!-- minute hand -->
+    <g fill="#080" stroke="#080"  transform="rotate(48)">
+      <circle stroke="none" cx="0" cy="0" r="6"/>
+      <line fill="none" x1="0" x2="0" y1="0" y2="-85" stroke-width="8"/>
+    </g>
+  </g>
+</svg>
+<!-- vim: ts=2:sts=2:sw=2:et
+  -->

@@ -1,0 +1,138 @@
+body
+{
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  font-size: 20pt;
+  font-family: sans-serif;
+  background-color: white;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+body.green
+{
+  background-color: #88FF88;
+  transition: 0s;
+}
+body.red
+{
+  background-color: #FF8888;
+  transition: 0s;
+}
+.catch_scroll_event
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: green;
+}
+.clock
+{
+  font-family: sans-serif;
+  font-size: 10pt;
+  padding: 0px;
+  fill: #000;
+  stroke: #000;
+  max-width: 400px;
+  max-height: 50%;
+  margin: 25px 50px;
+}
+.clock text
+{
+  stroke: none;
+  text-anchor: middle;
+  alignment-baseline: central;
+}
+.clock .hour-hand,
+.clock .minute-hand,
+.clock .hour-button,
+.clock .minute-button
+{
+  transition: 0.2s;
+}
+.clock.set-hour .hour-hand,
+.clock.set-minute .minute-hand,
+.clock.set-hour .hour-button,
+.clock.set-minute .minute-button
+{
+  stroke: #008800;
+  fill: #008800;
+}
+.clock .hour-button text, .clock .minute-button text
+{
+  fill: #fff;
+  font-weight: bold;
+}
+.top-bar
+{
+  background: #ccc;
+}
+.top-bar p
+{
+  margin: 0px;
+  padding: 10px;
+}
+.overlay
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: #444;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.overlay .clock
+{
+  fill: #fff;
+  stroke: #fff;
+}
+.overlay.good-answer
+{
+  background: #080;
+  color: #fff;
+}
+.overlay.wrong-answer
+{
+  background: #800;
+  color :#fff;
+}
+.overlay p.big
+{
+  margin-top: 100px;
+  font-size: 200%;
+  font-weight: bold;
+}
+.button
+{
+  display: inline-block;
+  background: #158;
+  color: white;
+  text-transform: uppercase;
+  padding: 1ex 2ex;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.invisible
+{
+  opacity: 0;
+}
+
+@media (max-width: 500px)
+{
+  body
+  {
+    font-size: 15pt;
+  }
+}
+
+/* vim: ts=2:sts=2:sw=2:et:fdm=indent
+ */
