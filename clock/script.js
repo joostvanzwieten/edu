@@ -81,6 +81,11 @@ function floormod(a, b)
   return a-Math.floor(a/b)*b;
 }
 
+function round_multiple(a, b)
+{
+  return Math.round(a/b)*b;
+}
+
 function angle_difference(a, b)
 {
   let d = floormod(a-b, 2*Math.PI);
@@ -267,7 +272,7 @@ class ClockWidget
         current.minute = t.minute;
       t = current.hour*60+current.minute;
     }
-    this._time_in_minutes = floormod(t, 60*12);
+    this._time_in_minutes = round_multiple(floormod(t, 60*12), this._delta.minute);
     for (let hand of ['hour', 'minute'])
       this._el_hand[hand].setAttribute('transform',
         'rotate({})'.format(this._hand_angles_degrees[hand]));
