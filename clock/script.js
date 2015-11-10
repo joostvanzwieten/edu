@@ -134,7 +134,7 @@ class ClockWidget
 {
   constructor(kwargs)
   {
-    this._adjustable = true;
+    this._adjustable = false;
     this._delta = {hour: 60, minute: 1};
     this._angle_delta = {hour: 2*Math.PI/12/5, minute: 2*Math.PI/12/5};
     if (kwargs === undefined)
@@ -403,6 +403,7 @@ class ClockTest
 
     this._top_bar = create_html_element('div', {'class': 'top-bar'});
     this._question = create_html_element('div', {'class': 'question'});
+    kwargs.adjustable = true;
     this._clock = new ClockWidget(kwargs);
     this._main = create_vertically_centered_html_element(
       'div',
