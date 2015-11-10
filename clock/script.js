@@ -469,8 +469,9 @@ class ClockTest
     el.outer.style.opacity = 0;
     window.getComputedStyle(el.outer).opacity;
     el.outer.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    extra.addEventListener('click', call);
+    extra.addEventListener('touchstart', call);
     window.setTimeout(this.reveal_extra.bind(this, extra), 3000);
   }
 
@@ -523,8 +524,9 @@ class ClockTest
     el.outer.style.opacity = 0;
     window.getComputedStyle(el.outer).opacity;
     el.outer.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    extra.addEventListener('click', call);
+    extra.addEventListener('touchstart', call);
     window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
   }
 
@@ -554,9 +556,21 @@ class ClockTest
     el.outer.style.opacity = 0;
     window.getComputedStyle(el.outer).opacity;
     el.outer.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
+    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
+    extra.addEventListener('click', call);
+    extra.addEventListener('touchstart', call);
     window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
+  }
+
+  call_if_visible(button, call, e)
+  {
+    if (!button.classList.contains('invisible'))
+      call(e);
+    else
+    {
+      e.stopPropagation();
+      e.preventDefault();
+    }
   }
 
   reveal_extra(extra)
