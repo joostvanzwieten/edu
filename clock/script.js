@@ -267,11 +267,11 @@ class ClockWidget
       }
       this._element.classList.add('set-hour');
       this._adjust_hand = 'hour';
-    }
 
-    for (let e of ['touchstart', 'touchmove', 'touchend'])
-      this._element.addEventListener(e, this['_clock_'+e].bind(this));
-    this._element.addEventListener('selectstart', this._stop_event);
+      for (let e of ['touchstart', 'touchmove', 'touchend'])
+        this._element.addEventListener(e, this['_clock_'+e].bind(this));
+      this._element.addEventListener('selectstart', this._stop_event);
+    }
   }
 
   get time()
