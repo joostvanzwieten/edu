@@ -407,50 +407,40 @@ class ClockTest
 
   skip_question()
   {
-    let extra = undefined;
+    let extra = create_html_element(
+      'div',
+      {
+        'class': 'button invisible',
+        text: 'verder',
+      });
     let call_next = undefined;
+    let fadeout = true;
     if (this._question_number == this._n_questions)
     {
-      extra = create_html_element(
-        'div',
-        {
-          'class': 'button invisible',
-          text: 'begin opnieuw',
-        });
-      call_next = this.reset.bind(this);
+      call_next = this.add_overlay_stats.bind(this);
+      fadeout = false;
     }
     else
-    {
-      extra = create_html_element(
-        'div',
-        {
-          'class': 'button invisible',
-          text: 'volgende vraag',
-        });
       call_next = this.next_question.bind(this);
-    }
     let clock = new ClockWidget({adjustable: false});
     clock.time = this._goal;
-    let children = [
-      create_html_element('p', {text: this._question.textContent}),
-      create_html_element('p', {text: 'Het goede antwoord is:'}),
-      clock._element,
-    ];
-    if (this._question_number == this._n_questions)
-      children.push(create_html_element('p', {text: 'Dit was de laatste vraag.'}));
-    children.push(extra);
     let el = create_html_element(
       'div',
       {
         'class': 'overlay',
-        children: children,
+        children: [
+          create_html_element('p', {text: this._question.textContent}),
+          create_html_element('p', {text: 'Het goede antwoord is:'}),
+          clock._element,
+          extra,
+        ],
       });
     this._element.appendChild(el);
     el.style.opacity = 0;
     window.getComputedStyle(el).opacity;
     el.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next));
+    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next, fadeout));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next, fadeout));
     window.setTimeout(this.reveal_extra.bind(this, extra), 3000);
   }
 
@@ -473,46 +463,66 @@ class ClockTest
 
   add_overlay_good()
   {
-    let extra = undefined;
+    let extra = create_html_element(
+      'div',
+      {
+        'class': 'button invisible',
+        text: 'verder',
+      });
     let call_next = undefined;
+    let fadeout = true;
     if (this._question_number == this._n_questions)
     {
-      extra = create_html_element(
-        'div',
-        {
-          'class': 'button invisible',
-          text: 'begin opnieuw',
-        });
-      call_next = this.reset.bind(this);
+      call_next = this.add_overlay_stats.bind(this);
+      fadeout = false;
     }
     else
-    {
-      extra = create_html_element(
-        'div',
-        {
-          'class': 'button invisible',
-          text: 'volgende vraag',
-        });
       call_next = this.next_question.bind(this);
-    }
-    let children = [
-      create_html_element('p', {'class': 'big', text: 'GOED!'}),
-    ];
-    if (this._question_number == this._n_questions)
-      children.push(create_html_element('p', {text: 'Dit was de laatste vraag.'}));
-    children.push(extra);
     let el = create_html_element(
       'div',
       {
         'class': 'overlay good-answer',
-        children: children,
+        children: [
+          create_html_element('p', {'class': 'big', text: 'GOED!'}),
+          extra,
+        ],
       });
     this._element.appendChild(el);
     el.style.opacity = 0;
     window.getComputedStyle(el).opacity;
     el.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next));
+    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next, fadeout));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next, fadeout));
+    window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
+  }
+
+  add_overlay_stats()
+  {
+    let extra = create_html_element(
+      'div',
+      {
+        'class': 'button invisible',
+        text: 'begin opnieuw',
+      });
+    let children = [
+      create_html_element('p', {'class': 'big', text: 'GOED!'}),
+    ];
+    let el = create_html_element(
+      'div',
+      {
+        'class': 'overlay',
+        children: [
+          create_html_element('p', {text: 'Je bent klaar!'}),
+          create_html_element('p', {text: 'Je hebt {} van de {} vragen goed beantwoord.'.format(this._n_questions_good, this._n_questions)}),
+          extra
+        ],
+      });
+    this._element.appendChild(el);
+    el.style.opacity = 0;
+    window.getComputedStyle(el).opacity;
+    el.style.opacity = 1;
+    extra.addEventListener('click', this.remove_overlay.bind(this, el, this.reset.bind(this)));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, this.reset.bind(this)));
     window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
   }
 
@@ -521,10 +531,13 @@ class ClockTest
     extra.classList.remove('invisible');
   }
 
-  remove_overlay(overlay, call_next)
+  remove_overlay(overlay, call_next, fadeout)
   {
+    if (fadeout === undefined)
+      fadeout = true;
     window.setTimeout(this.remove_overlay_part2.bind(this, overlay), 200);
-    overlay.style.opacity = 0;
+    if (fadeout)
+      overlay.style.opacity = 0;
     if (call_next !== undefined)
       call_next();
   }
@@ -537,6 +550,7 @@ class ClockTest
   reset()
   {
     this._question_number = 0;
+    this._n_questions_good = 0;
     this._clock.time = 0;
     this.next_question();
   }
@@ -562,7 +576,10 @@ class ClockTest
   test_answer()
   {
     if ((this._goal.hour-this._clock.time.hour)%12 == 0 && (this._goal.minute-this._clock.time.minute)%60 == 0)
+    {
       this.add_overlay_good();
+      this._n_questions_good += 1;
+    }
     else
       this.add_overlay_wrong();
   }
