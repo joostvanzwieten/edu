@@ -159,6 +159,8 @@ class ClockWidget
         viewBox: '-100 -100 200 200',
         xmlns: 'http://www.w3.org/2000/xmlns/',
       });
+    if (this._adjustable)
+      this._element.classList.add('adjustable');
     // TODO: CHECK FOLLOWING LINE
     this._element.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 

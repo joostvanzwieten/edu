@@ -53,6 +53,11 @@ body.red
   max-width: 400px;
   max-height: 50%;
   margin: 25px 50px;
+  cursor: default;
+}
+.clock.adjustable
+{
+  cursor: pointer;
 }
 .clock text
 {
