@@ -264,11 +264,13 @@ class ClockWidget
           });
         this._element.appendChild(el);
         el.addEventListener('touchstart', this.set_adjust.bind(this, s.hand));
+        el.addEventListener('mousedown', this.set_adjust_mouse.bind(this, s.hand));
       }
       this._element.classList.add('set-hour');
       this._adjust_hand = 'hour';
 
-      for (let e of ['touchstart', 'touchmove', 'touchend'])
+      this._mouse_down = false;
+      for (let e of ['touchstart', 'touchmove', 'touchend', 'mousedown', 'mouseup', 'mouseleave', 'mousemove'])
         this._element.addEventListener(e, this['_clock_'+e].bind(this));
       this._element.addEventListener('selectstart', this._stop_event);
     }
@@ -364,6 +366,45 @@ class ClockWidget
     this._element.dispatchEvent(new Event('user-changed-clock'));
   }
 
+  _clock_mousedown(e)
+  {
+    this._adjust_angle = this._calc_angle(e);
+    this._mouse_down = true;
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  _clock_mouseup(e)
+  {
+    this._mouse_down = false;
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  _clock_mouseleave(e)
+  {
+    this._mouse_down = false;
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  _clock_mousemove(e)
+  {
+    if (this._mouse_down)
+    {
+      let new_angle = this._calc_angle(e);
+      let delta = round_towards_zero(
+        angle_difference(new_angle, this._adjust_angle)
+        /this._angle_delta[this._adjust_hand]);
+      this._adjust_angle = floormod(
+        this._adjust_angle+delta*this._angle_delta[this._adjust_hand], 2*Math.PI);
+      if (delta != 0)
+        this.time = this._time_in_minutes + delta*this._delta[this._adjust_hand];
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   _stop_event(e)
   {
     e.stopPropagation();
@@ -384,6 +425,13 @@ class ClockWidget
       this._element.classList.add('set-hour');
       this._adjust_hand = 'hour';
     }
+  }
+
+  set_adjust_mouse(hand, e)
+  {
+    this.set_adjust(hand);
+    e.stopPropagation();
+    e.preventDefault();
   }
 }
 
