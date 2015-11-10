@@ -353,6 +353,8 @@ class ClockWidget
       this._adjust_angle+delta*this._angle_delta[this._adjust_hand], 2*Math.PI);
     if (delta != 0)
       this.time = this._time_in_minutes + delta*this._delta[this._adjust_hand];
+    e.stopPropagation();
+    e.preventDefault();
   }
 
   _clock_touchend(e)
