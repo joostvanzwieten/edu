@@ -410,7 +410,7 @@ class ClockTest
       {
         children: [
           this._question,
-          this._clock._element,
+          create_html_element('div', {children: [this._clock._element]}),
           create_html_element('div', {children: [
             create_html_element('div', {'class': 'button', text: 'sla over', events: {click: this.skip_question.bind(this), touchstart: this.skip_question.bind(this)}}),
             create_html_element('div', {'class': 'button', text: 'controleer', events: {click: this.test_answer.bind(this), touchstart: this.test_answer.bind(this)}}),
@@ -459,7 +459,7 @@ class ClockTest
         children: [
           create_html_element('p', {text: this._question.textContent}),
           create_html_element('p', {text: 'Het goede antwoord is:'}),
-          clock._element,
+          create_html_element('div', {children: [clock._element]}),
           extra,
         ],
       },
