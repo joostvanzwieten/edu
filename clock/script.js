@@ -76,6 +76,27 @@ function create_svg_element(tag, attributes)
   return element;
 }
 
+function create_vertically_centered_html_element(inner_tag, inner_attributes, outer_attributes)
+{
+  if (outer_attributes === undefined)
+    outer_attributes = {};
+  let inner = create_html_element(inner_tag, inner_attributes);
+  inner.classList.add('vertically-centered-content-3');
+  outer_attributes.children = [
+    create_html_element(
+      'div',
+      {
+        'class': 'vertically-centered-content-2',
+      }),
+    inner,
+  ];
+  let outer = create_html_element(
+    'div',
+    outer_attributes);
+  outer.classList.add('vertically-centered-content-1');
+  return {outer: outer, inner: inner};
+}
+
 function floormod(a, b)
 {
   return a-Math.floor(a/b)*b;
@@ -383,19 +404,26 @@ class ClockTest
     this._top_bar = create_html_element('div', {'class': 'top-bar'});
     this._question = create_html_element('div', {'class': 'question'});
     this._clock = new ClockWidget(kwargs);
+    this._main = create_vertically_centered_html_element(
+      'div',
+      {
+        children: [
+          this._question,
+          this._clock._element,
+          create_html_element('div', {children: [
+            create_html_element('div', {'class': 'button', text: 'sla over', events: {click: this.skip_question.bind(this), touchstart: this.skip_question.bind(this)}}),
+            create_html_element('div', {'class': 'button', text: 'controleer', events: {click: this.test_answer.bind(this), touchstart: this.test_answer.bind(this)}}),
+          ]}),
+        ],
+      },
+      {}
+    );
 
     this._top_bar_text = create_html_element('p');
     this._top_bar.appendChild(this._top_bar_text);
 
     this._element.appendChild(this._top_bar);
-    this._element.appendChild(this._question);
-    this._element.appendChild(this._clock._element);
-    this._element.appendChild(
-      create_html_element('div', {children: [
-        create_html_element('div', {'class': 'button', text: 'sla over', events: {click: this.skip_question.bind(this), touchstart: this.skip_question.bind(this)}}),
-        create_html_element('div', {'class': 'button', text: 'controleer', events: {click: this.test_answer.bind(this), touchstart: this.test_answer.bind(this)}}),
-      ]})
-    );
+    this._element.appendChild(this._main.outer);
 
     this._element.addEventListener('selectstart', this.stop_event);
     this._element.addEventListener('touchstart', this.stop_event);
@@ -424,41 +452,43 @@ class ClockTest
       call_next = this.next_question.bind(this);
     let clock = new ClockWidget({adjustable: false});
     clock.time = this._goal;
-    let el = create_html_element(
+    let el = create_vertically_centered_html_element(
       'div',
       {
-        'class': 'overlay',
         children: [
           create_html_element('p', {text: this._question.textContent}),
           create_html_element('p', {text: 'Het goede antwoord is:'}),
           clock._element,
           extra,
         ],
-      });
-    this._element.appendChild(el);
-    el.style.opacity = 0;
-    window.getComputedStyle(el).opacity;
-    el.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next, fadeout));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next, fadeout));
+      },
+      {'class': 'overlay'}
+    );
+    this._element.appendChild(el.outer);
+    el.outer.style.opacity = 0;
+    window.getComputedStyle(el.outer).opacity;
+    el.outer.style.opacity = 1;
+    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     window.setTimeout(this.reveal_extra.bind(this, extra), 3000);
   }
 
   add_overlay_wrong()
   {
-    let el = create_html_element(
+    let el = create_vertically_centered_html_element(
       'div',
       {
-        'class': 'overlay wrong-answer',
         children: [
           create_html_element('p', {'class': 'big', text: 'FOUT!'}),
         ],
-      });
-    this._element.appendChild(el);
-    el.style.opacity = 0;
-    window.getComputedStyle(el).opacity;
-    el.style.opacity = 1;
-    window.setTimeout(this.remove_overlay.bind(this, el), 2000);
+      },
+      {'class': 'overlay wrong-answer'}
+    );
+    this._element.appendChild(el.outer);
+    el.outer.style.opacity = 0;
+    window.getComputedStyle(el.outer).opacity;
+    el.outer.style.opacity = 1;
+    window.setTimeout(this.remove_overlay.bind(this, el.outer), 2000);
   }
 
   add_overlay_good()
@@ -478,21 +508,22 @@ class ClockTest
     }
     else
       call_next = this.next_question.bind(this);
-    let el = create_html_element(
+    let el = create_vertically_centered_html_element(
       'div',
       {
-        'class': 'overlay good-answer',
         children: [
           create_html_element('p', {'class': 'big', text: 'GOED!'}),
           extra,
         ],
-      });
-    this._element.appendChild(el);
-    el.style.opacity = 0;
-    window.getComputedStyle(el).opacity;
-    el.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el, call_next, fadeout));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, call_next, fadeout));
+      },
+      {'class': 'overlay good-answer'}
+    );
+    this._element.appendChild(el.outer);
+    el.outer.style.opacity = 0;
+    window.getComputedStyle(el.outer).opacity;
+    el.outer.style.opacity = 1;
+    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
   }
 
@@ -507,22 +538,23 @@ class ClockTest
     let children = [
       create_html_element('p', {'class': 'big', text: 'GOED!'}),
     ];
-    let el = create_html_element(
+    let el = create_vertically_centered_html_element(
       'div',
       {
-        'class': 'overlay',
         children: [
           create_html_element('p', {text: 'Je bent klaar!'}),
           create_html_element('p', {text: 'Je hebt {} van de {} vragen goed beantwoord.'.format(this._n_questions_good, this._n_questions)}),
           extra
         ],
-      });
-    this._element.appendChild(el);
-    el.style.opacity = 0;
-    window.getComputedStyle(el).opacity;
-    el.style.opacity = 1;
-    extra.addEventListener('click', this.remove_overlay.bind(this, el, this.reset.bind(this)));
-    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el, this.reset.bind(this)));
+      },
+      {'class': 'overlay'}
+    );
+    this._element.appendChild(el.outer);
+    el.outer.style.opacity = 0;
+    window.getComputedStyle(el.outer).opacity;
+    el.outer.style.opacity = 1;
+    extra.addEventListener('click', this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
+    extra.addEventListener('touchstart', this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
     window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
   }
 

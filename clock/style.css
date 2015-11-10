@@ -22,14 +22,26 @@ body.red
   background-color: #FF8888;
   transition: 0s;
 }
-.catch_scroll_event
+.vertically-centered-content-1
 {
   position: fixed;
   top: 0px;
+  bottom: 0px;
   left: 0px;
   right: 0px;
-  bottom: 0px;
-  background: green;
+}
+.vertically-centered-content-2
+{
+  display: inline-block;
+  height: 100%;
+  width: 0px;
+  vertical-align: middle;
+}
+.vertically-centered-content-3
+{
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
 }
 .clock
 {
@@ -79,11 +91,6 @@ body.red
 }
 .overlay
 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
   background: #444;
   color: #fff;
   transition: opacity 0.2s;
@@ -105,7 +112,6 @@ body.red
 }
 .overlay p.big
 {
-  margin-top: 100px;
   font-size: 200%;
   font-weight: bold;
 }
