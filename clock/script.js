@@ -647,7 +647,11 @@ class ClockTest
 
   remove_overlay_part2(overlay)
   {
-    this._element.removeChild(overlay);
+    try
+    {
+      this._element.removeChild(overlay);
+    }
+    catch (e) {}
   }
 
   reset()
