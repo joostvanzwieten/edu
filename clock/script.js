@@ -518,9 +518,9 @@ class ClockTest
       {'class': 'overlay'}
     );
     this._element.appendChild(el.outer);
-    el.outer.style.opacity = 0;
+    el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
-    el.outer.style.opacity = 1;
+    el.outer.classList.remove('fadein');
     let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
@@ -539,9 +539,9 @@ class ClockTest
       {'class': 'overlay wrong-answer'}
     );
     this._element.appendChild(el.outer);
-    el.outer.style.opacity = 0;
+    el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
-    el.outer.style.opacity = 1;
+    el.outer.classList.remove('fadein');
     window.setTimeout(this.remove_overlay.bind(this, el.outer), 2000);
   }
 
@@ -573,9 +573,9 @@ class ClockTest
       {'class': 'overlay good-answer'}
     );
     this._element.appendChild(el.outer);
-    el.outer.style.opacity = 0;
+    el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
-    el.outer.style.opacity = 1;
+    el.outer.classList.remove('fadein');
     let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
@@ -605,9 +605,9 @@ class ClockTest
       {'class': 'overlay'}
     );
     this._element.appendChild(el.outer);
-    el.outer.style.opacity = 0;
+    el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
-    el.outer.style.opacity = 1;
+    el.outer.classList.remove('fadein');
     let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
@@ -634,9 +634,13 @@ class ClockTest
   {
     if (fadeout === undefined)
       fadeout = true;
-    window.setTimeout(this.remove_overlay_part2.bind(this, overlay), 200);
     if (fadeout)
-      overlay.style.opacity = 0;
+    {
+      overlay.addEventListener('transitionend', this.remove_overlay_part2.bind(this, overlay));
+      overlay.classList.add('fadeout');
+    }
+    else
+      window.setTimeout(this.remove_overlay_part2.bind(this, overlay), 200);
     if (call_next !== undefined)
       call_next();
   }

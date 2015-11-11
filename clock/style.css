@@ -98,7 +98,11 @@ body.red
 {
   background: #444;
   color: #fff;
-  transition: opacity 0.2s;
+  transition: 0.2s;
+}
+.overlay.fadein, .overlay.fadeout
+{
+  opacity: 0;
 }
 .overlay .clock
 {
