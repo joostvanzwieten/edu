@@ -631,7 +631,7 @@ class ClockTest
       {
         children: [
           create_html_element('p', {text: 'Je bent klaar!'}),
-          create_html_element('p', {text: 'Je hebt {} van de {} vragen goed beantwoord.'.format(this._n_questions_good, this._n_questions)}),
+          create_html_element('p', {text: 'Je hebt {} van de {} vragen goed beantwoord waarvan {} in één keer.'.format(this._n_questions_good, this._n_questions, this._n_questions_good_first_try)}),
           extra
         ],
       },
@@ -691,6 +691,7 @@ class ClockTest
   {
     this._question_number = 0;
     this._n_questions_good = 0;
+    this._n_questions_good_first_try = 0;
     this._clock.time = 0;
     this.next_question();
   }
@@ -699,6 +700,7 @@ class ClockTest
   {
     this._clock.set_adjust('hour');
     this._question_number += 1;
+    this._question_n_tries = 0;
     this._top_bar_text.textContent = 'vraag {} van {}'.format(this._question_number, this._n_questions);
     for (var i = 0; i < 100; i++)
     {
@@ -715,10 +717,13 @@ class ClockTest
 
   test_answer()
   {
+    this._question_n_tries += 1;
     if ((this._goal.hour-this._clock.time.hour)%12 == 0 && (this._goal.minute-this._clock.time.minute)%60 == 0)
     {
       this.add_overlay_good();
       this._n_questions_good += 1;
+      if (this._question_n_tries == 1)
+        this._n_questions_good_first_try += 1;
     }
     else
       this.add_overlay_wrong();
