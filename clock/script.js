@@ -139,6 +139,16 @@ function clip(x, limits)
   return x;
 }
 
+function randrange(settings)
+{
+  if (settings.start === undefined)
+    settings.start = 0;
+  if (settings.step === undefined)
+    settings.step = 1;
+  let n = round_towards_zero((settings.stop+settings.step-1-settings.start)/settings.step);
+  return settings.start+clip(round_towards_zero(Math.random()*n), {min: 0, max: n-1})*settings.step;
+}
+
 class ClockWidget
 {
   constructor(kwargs)
@@ -294,6 +304,7 @@ class ClockWidget
     return {
       minute: floormod(this._time_in_minutes, 60),
       hour: floormod(Math.floor(this._time_in_minutes/60), 12),
+      cumulative_minutes: this._time_in_minutes,
     };
   }
 
@@ -702,15 +713,13 @@ class ClockTest
     this._question_number += 1;
     this._question_n_tries = 0;
     this._top_bar_text.textContent = 'vraag {} van {}'.format(this._question_number, this._n_questions);
-    for (var i = 0; i < 100; i++)
-    {
-      this._goal = {
-        hour: Math.floor(Math.random() * 12)%12,
-        minute: (Math.floor(Math.random() * this._n_steps_minute) % this._n_steps_minute ) * this._minute_delta,
-      };
-      if (this._goal.hour != this._clock.time.hour && this._goal.minute != this._clock.time.minute)
-        break;
-    }
+    let goal_minutes = randrange({start: 0, stop: 12*60-this._minute_delta, step: this._minute_delta});
+    if (goal_minutes >= this._clock.time.cumulative_minutes)
+      goal_minutes += this._minute_delta;
+    this._goal = {
+      hour: round_towards_zero(goal_minutes/60),
+      minute: goal_minutes%60,
+    };
     this._question.innerHTML = '';
     this._question.appendChild(create_html_element('p', {text: 'Zet de klok op ' + this.format_time_sentence(this._goal) + '.'}));
   }
