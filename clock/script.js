@@ -130,6 +130,15 @@ function round_towards_zero(x)
     return Math.floor(x);
 }
 
+function clip(x, limits)
+{
+  if (limits.hasOwnProperty('min') && x < limits.min)
+    x = limits.min;
+  if (limits.hasOwnProperty('max') && x > limits.max)
+    x = limits.max;
+  return x;
+}
+
 class ClockWidget
 {
   constructor(kwargs)
@@ -151,12 +160,14 @@ class ClockWidget
 
     this._time_in_minutes = 0;
 
+    this._svg_radius = 100;
+
     this._element = create_svg_element(
       'svg',
       {
         'class': 'clock',
         version: '1.1',
-        viewBox: '-100 -100 200 200',
+        viewBox: '-{0} -{0} {1} {1}'.format(this._svg_radius, 2*this._svg_radius),
         xmlns: 'http://www.w3.org/2000/xmlns/',
       });
     if (this._adjustable)
@@ -342,21 +353,32 @@ class ClockWidget
 
   _clock_touchstart(e)
   {
-    this._adjust_angle = this._calc_angle(e.targetTouches[0]);
+    this._previous_touch = this._calc_local_coordinate(e.targetTouches[0]);
+    this._adjust_minutes = this._time_in_minutes;
     e.stopPropagation();
     e.preventDefault();
   }
 
   _clock_touchmove(e)
   {
-    let new_angle = this._calc_angle(e.targetTouches[0]);
-    let delta = round_towards_zero(
-      angle_difference(new_angle, this._adjust_angle)
-      /this._angle_delta[this._adjust_hand]);
-    this._adjust_angle = floormod(
-      this._adjust_angle+delta*this._angle_delta[this._adjust_hand], 2*Math.PI);
-    if (delta != 0)
-      this.time = this._time_in_minutes + delta*this._delta[this._adjust_hand];
+    let a = this._previous_touch;
+    let b = this._calc_local_coordinate(e.targetTouches[0]);
+    this._previous_touch = b;
+    let d = Math.pow(b.x-a.x,2)+Math.pow(b.y-a.y,2);
+    if (d > 0)
+    {
+      // compute smallest distance to the center along the line from `a` to `b`
+      let s = clip(
+        -(a.x*(b.x-a.x)+a.y*(b.y-a.y))/d,
+        {min: 0, max: 1});
+      let r = Math.sqrt(Math.pow(s*b.x+(1-s)*a.x,2)+Math.pow(s*b.y+(1-s)*a.y,2));
+      // ignore moves inside a quarter radius, full speed beyond a half radius
+      let factor = clip(4*r/this._svg_radius-1, {min: 0, max: 1});
+      let angle_delta = -angle_difference(Math.atan2(a.x, -a.y), Math.atan2(b.x, -b.y));
+      // update time
+      this._adjust_minutes += factor * angle_delta * this._delta[this._adjust_hand] / this._angle_delta[this._adjust_hand];
+      this.time = this._time_in_minutes+round_multiple(this._adjust_minutes-this._time_in_minutes, this._delta[this._adjust_hand]);
+    }
     e.stopPropagation();
     e.preventDefault();
   }
@@ -370,7 +392,8 @@ class ClockWidget
 
   _clock_mousedown(e)
   {
-    this._adjust_angle = this._calc_angle(e);
+    this._previous_mouse = this._calc_local_coordinate(e);
+    this._adjust_minutes = this._time_in_minutes;
     this._mouse_down = true;
     e.stopPropagation();
     e.preventDefault();
@@ -394,14 +417,24 @@ class ClockWidget
   {
     if (this._mouse_down)
     {
-      let new_angle = this._calc_angle(e);
-      let delta = round_towards_zero(
-        angle_difference(new_angle, this._adjust_angle)
-        /this._angle_delta[this._adjust_hand]);
-      this._adjust_angle = floormod(
-        this._adjust_angle+delta*this._angle_delta[this._adjust_hand], 2*Math.PI);
-      if (delta != 0)
-        this.time = this._time_in_minutes + delta*this._delta[this._adjust_hand];
+      let a = this._previous_mouse;
+      let b = this._calc_local_coordinate(e);
+      this._previous_mouse = b;
+      let d = Math.pow(b.x-a.x,2)+Math.pow(b.y-a.y,2);
+      if (d > 0)
+      {
+        // compute smallest distance to the center along the line from `a` to `b`
+        let s = clip(
+          -(a.x*(b.x-a.x)+a.y*(b.y-a.y))/d,
+          {min: 0, max: 1});
+        let r = Math.sqrt(Math.pow(s*b.x+(1-s)*a.x,2)+Math.pow(s*b.y+(1-s)*a.y,2));
+        // ignore moves inside a quarter radius, full speed beyond a half radius
+        let factor = clip(4*r/this._svg_radius-1, {min: 0, max: 1});
+        let angle_delta = -angle_difference(Math.atan2(a.x, -a.y), Math.atan2(b.x, -b.y));
+        // update time
+        this._adjust_minutes += factor * angle_delta * this._delta[this._adjust_hand] / this._angle_delta[this._adjust_hand];
+        this.time = this._time_in_minutes+round_multiple(this._adjust_minutes-this._time_in_minutes, this._delta[this._adjust_hand]);
+      }
     }
     e.stopPropagation();
     e.preventDefault();
