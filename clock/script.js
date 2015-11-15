@@ -704,11 +704,13 @@ class ClockTest
     this._n_questions_good = 0;
     this._n_questions_good_first_try = 0;
     this._clock.time = 0;
+    this._goal = this._clock.time;
     this.next_question();
   }
 
   next_question()
   {
+    this._clock.time = this._goal;
     this._clock.set_adjust('hour');
     this._question_number += 1;
     this._question_n_tries = 0;
