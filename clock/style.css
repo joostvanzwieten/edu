@@ -140,11 +140,11 @@ body.red
   margin: 10px;
   border-radius: 5px;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: background 0.2s;
 }
-.invisible
+.button.disabled
 {
-  opacity: 0;
+  background: #888;
 }
 
 @media (max-width: 500px)

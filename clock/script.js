@@ -501,16 +501,19 @@ class ClockTest
     this._question = create_html_element('div', {'class': 'question'});
     kwargs.adjustable = true;
     this._clock = new ClockWidget(kwargs);
+    this._button_skip = create_html_element('div', {'class': 'button', text: 'sla over'});
+    this._button_check = create_html_element('div', {'class': 'button', text: 'controleer'});
+    this._button_skip.addEventListener('click', this.call_if_enabled.bind(this, this._button_skip, [this._button_check], this.skip_question.bind(this)));
+    this._button_skip.addEventListener('touchstart', this.call_if_enabled.bind(this, this._button_skip, [this._button_check], this.skip_question.bind(this)));
+    this._button_check.addEventListener('click', this.call_if_enabled.bind(this, this._button_check, [this._button_skip], this.test_answer.bind(this)));
+    this._button_check.addEventListener('touchstart', this.call_if_enabled.bind(this, this._button_check, [this._button_skip], this.test_answer.bind(this)));
     this._main = create_vertically_centered_html_element(
       'div',
       {
         children: [
           this._question,
           create_html_element('div', {children: [this._clock._element]}),
-          create_html_element('div', {children: [
-            create_html_element('div', {'class': 'button', text: 'sla over', events: {click: this.skip_question.bind(this), touchstart: this.skip_question.bind(this)}}),
-            create_html_element('div', {'class': 'button', text: 'controleer', events: {click: this.test_answer.bind(this), touchstart: this.test_answer.bind(this)}}),
-          ]}),
+          create_html_element('div', {children: [this._button_skip, this._button_check]}),
         ],
       },
       {}
@@ -530,12 +533,17 @@ class ClockTest
     this.reset();
   }
 
-  skip_question()
+  skip_question(e)
   {
+    if (e !== undefined)
+    {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     let extra = create_html_element(
       'div',
       {
-        'class': 'button invisible',
+        'class': 'button disabled',
         text: 'verder',
       });
     let call_next = undefined;
@@ -565,10 +573,10 @@ class ClockTest
     el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
     el.outer.classList.remove('fadein');
-    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    let call = this.call_if_enabled.bind(this, extra, [], this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
-    window.setTimeout(this.reveal_extra.bind(this, extra), 3000);
+    window.setTimeout(this.enable_extra.bind(this, extra), 3000);
   }
 
   add_overlay_wrong()
@@ -594,7 +602,7 @@ class ClockTest
     let extra = create_html_element(
       'div',
       {
-        'class': 'button invisible',
+        'class': 'button disabled',
         text: 'verder',
       });
     let call_next = undefined;
@@ -620,10 +628,10 @@ class ClockTest
     el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
     el.outer.classList.remove('fadein');
-    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, call_next, fadeout));
+    let call = this.call_if_enabled.bind(this, extra, [], this.remove_overlay.bind(this, el.outer, call_next, fadeout));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
-    window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
+    window.setTimeout(this.enable_extra.bind(this, extra), 1000);
   }
 
   add_overlay_stats()
@@ -631,7 +639,7 @@ class ClockTest
     let extra = create_html_element(
       'div',
       {
-        'class': 'button invisible',
+        'class': 'button disabled',
         text: 'begin opnieuw',
       });
     let children = [
@@ -652,16 +660,21 @@ class ClockTest
     el.outer.classList.add('fadein');
     window.getComputedStyle(el.outer).opacity;
     el.outer.classList.remove('fadein');
-    let call = this.call_if_visible.bind(this, extra, this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
+    let call = this.call_if_enabled.bind(this, extra, [], this.remove_overlay.bind(this, el.outer, this.reset.bind(this)));
     extra.addEventListener('click', call);
     extra.addEventListener('touchstart', call);
-    window.setTimeout(this.reveal_extra.bind(this, extra), 1000);
+    window.setTimeout(this.enable_extra.bind(this, extra), 1000);
   }
 
-  call_if_visible(button, call, e)
+  call_if_enabled(button, disable_extra, call, e)
   {
-    if (!button.classList.contains('invisible'))
+    if (!button.classList.contains('disabled'))
+    {
+      button.classList.add('disabled');
+      for (let el of disable_extra)
+        el.classList.add('disabled');
       call(e);
+    }
     else
     {
       e.stopPropagation();
@@ -669,13 +682,15 @@ class ClockTest
     }
   }
 
-  reveal_extra(extra)
+  enable_extra(extra)
   {
-    extra.classList.remove('invisible');
+    extra.classList.remove('disabled');
   }
 
   remove_overlay(overlay, call_next, fadeout)
   {
+    this._button_skip.classList.remove('disabled');
+    this._button_check.classList.remove('disabled');
     if (fadeout === undefined)
       fadeout = true;
     if (fadeout)
@@ -724,10 +739,17 @@ class ClockTest
     };
     this._question.innerHTML = '';
     this._question.appendChild(create_html_element('p', {text: 'Zet de klok op ' + this.format_time_sentence(this._goal) + '.'}));
+    this._button_skip.classList.remove('disabled');
+    this._button_check.classList.remove('disabled');
   }
 
-  test_answer()
+  test_answer(e)
   {
+    if (e !== undefined)
+    {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     this._question_n_tries += 1;
     if ((this._goal.hour-this._clock.time.hour)%12 == 0 && (this._goal.minute-this._clock.time.minute)%60 == 0)
     {
