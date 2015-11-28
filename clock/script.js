@@ -289,7 +289,7 @@ class ClockWidget
         el.addEventListener('touchstart', this.set_adjust_touch.bind(this, s.hand));
         el.addEventListener('mousedown', this.set_adjust_mouse.bind(this, s.hand));
       }
-      this.adjust = 'hour';
+      this.adjust = 'minute';
 
       this._mouse_down = false;
       for (let e of ['touchstart', 'touchmove', 'touchend', 'mousedown', 'mouseup', 'mouseleave', 'mousemove'])
@@ -735,7 +735,7 @@ class ClockTest
   next_question()
   {
     this._clock.time = this._goal;
-    this._clock.adjust = 'hour';
+    this._clock.adjust = 'minute';
     this._question_number += 1;
     this._question_n_tries = 0;
     this._top_bar_text.textContent = 'vraag {} van {}'.format(this._question_number, this._n_questions);
