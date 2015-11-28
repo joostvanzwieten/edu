@@ -4,6 +4,7 @@ set -e
 
 git worktree add /tmp/gh-pages $1
 cd /tmp/gh-pages
+./build
 (cd clock; ./build)
 find . -name .gitignore -delete
 git add .
