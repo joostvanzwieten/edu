@@ -286,11 +286,10 @@ class ClockWidget
             ],
           });
         this._element.appendChild(el);
-        el.addEventListener('touchstart', this.set_adjust.bind(this, s.hand));
+        el.addEventListener('touchstart', this.set_adjust_touch.bind(this, s.hand));
         el.addEventListener('mousedown', this.set_adjust_mouse.bind(this, s.hand));
       }
-      this._element.classList.add('set-hour');
-      this._adjust_hand = 'hour';
+      this.adjust = 'hour';
 
       this._mouse_down = false;
       for (let e of ['touchstart', 'touchmove', 'touchend', 'mousedown', 'mouseup', 'mouseleave', 'mousemove'])
@@ -457,7 +456,12 @@ class ClockWidget
     e.preventDefault();
   }
 
-  set_adjust(hand)
+  get adjust()
+  {
+    return this._adjust_hand;
+  }
+
+  set adjust(hand)
   {
     if (hand === 'minute')
     {
@@ -473,9 +477,14 @@ class ClockWidget
     }
   }
 
+  set_adjust_touch(hand, e)
+  {
+    this.adjust = hand;
+  }
+
   set_adjust_mouse(hand, e)
   {
-    this.set_adjust(hand);
+    this.adjust = hand;
     e.stopPropagation();
     e.preventDefault();
   }
@@ -726,7 +735,7 @@ class ClockTest
   next_question()
   {
     this._clock.time = this._goal;
-    this._clock.set_adjust('hour');
+    this._clock.adjust = 'hour';
     this._question_number += 1;
     this._question_n_tries = 0;
     this._top_bar_text.textContent = 'vraag {} van {}'.format(this._question_number, this._n_questions);
