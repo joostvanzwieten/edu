@@ -10,6 +10,14 @@
   "background_color": "#444",
   "icons": [
     {"src": "icon.svg", "type": "image/svg+xml"},
-    {"src": "icon.ico", "sizes": "16x16 32x32 48x48 64x64 144x144 196x196 512x512 1024x1024"}
+    {"src": "icon-16.png", "type": "image/png", "sizes": "16x16"},
+    {"src": "icon-32.png", "type": "image/png", "sizes": "32x32"},
+    {"src": "icon-48.png", "type": "image/png", "sizes": "48x48"},
+    {"src": "icon-64.png", "type": "image/png", "sizes": "64x64"},
+    {"src": "icon-144.png", "type": "image/png", "sizes": "144x144"},
+    {"src": "icon-196.png", "type": "image/png", "sizes": "196x196"},
+    {"src": "icon-256.png", "type": "image/png", "sizes": "256x256"},
+    {"src": "icon-512.png", "type": "image/png", "sizes": "512x512"},
+    {"src": "icon-1024.png", "type": "image/png", "sizes": "1024x1024"}
   ]
 }
