@@ -1,8 +1,7 @@
 #! /bin/sh
 
 for size in 16 32 48 64 144 196; do
-  inkscape --export-area-page --export-png=tmp-icon-$size.png \
-    --export-background-opacity=0 -w $size -h $size icon.svg
+  rsvg-convert --format png --width $size --height $size icon.svg > tmp-icon-$size.png
 done
 convert -bordercolor white -border 0 \
   \( tmp-icon-16.png \) \
