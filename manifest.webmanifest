@@ -10,6 +10,6 @@
   "background_color": "#444",
   "icons": [
     {"src": "icon.svg", "type": "image/svg+xml"},
-    {"src": "icon.ico", "sizes": "16x16 32x32 48x48 64x64 144x144 196x196"}
+    {"src": "icon.ico", "sizes": "16x16 32x32 48x48 64x64 144x144 196x196 512x512 1024x1024"}
   ]
 }

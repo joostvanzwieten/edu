@@ -1,6 +1,6 @@
 #! /bin/sh
 
-for size in 16 32 48 64 144 196 256 512; do
+for size in 16 32 48 64 144 196 256 512 1024; do
   inkscape --export-area-page --export-png=icon-$size.png \
     --export-background-opacity=0 -w $size -h $size icon.svg
 done
@@ -11,4 +11,6 @@ convert -bordercolor white -border 0 \
   \( icon-64.png \) \
   \( icon-144.png \) \
   \( icon-196.png \) \
+  \( icon-512.png \) \
+  \( icon-1024.png \) \
   icon.ico
