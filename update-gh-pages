@@ -2,7 +2,7 @@
 
 set -e
 
-git worktree add /tmp/gh-pages $1
+git worktree add /tmp/gh-pages `git rev-parse $1`
 cd /tmp/gh-pages
 ./build
 (cd clock; ./build)
