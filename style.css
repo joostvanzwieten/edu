@@ -7,15 +7,21 @@ body
 }
 .apps
 {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: top;
 }
 .apps .app
 {
   display: inline-block;
   margin: 5px;
+  padding: 0px;
   text-decoration: none;
   color: inherit;
-  width: 64px;
+  width: 96px;
+  text-align: center;
 }
 .apps .app .icon
 {
@@ -23,7 +29,17 @@ body
   width: 64px;
   height: 64px;
   margin: 0px;
-  padding: 0px;
+  padding: 0px 16px;
+  -webkit-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+  -moz-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+  filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+}
+
+.apps .app:active .icon
+{
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
 }
 .apps .app .caption
 {
