@@ -10,6 +10,4 @@ convert -bordercolor white -border 0 \
   \( icon-64.png \) \
   \( icon-144.png \) \
   \( icon-196.png \) \
-  \( icon-512.png \) \
-  \( icon-1024.png \) \
   icon.ico
