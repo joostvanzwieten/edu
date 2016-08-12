@@ -6,6 +6,7 @@ git worktree add /tmp/gh-pages `git rev-parse $1`
 cd /tmp/gh-pages
 ./build
 (cd clock; ./build)
+(cd math-worksheet-generator; ./build)
 find . -name .gitignore -delete
 git add .
 git commit -m 'autogen'

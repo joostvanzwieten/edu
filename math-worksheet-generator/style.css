@@ -1,0 +1,303 @@
+html, body, div, p, table, span, h1, ul, ol, li
+{
+  padding: 0px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+html, body
+{
+  background: #eee;
+}
+
+body
+{
+  font-size: 10pt;
+  font-family: "Courier New", courier, monospace;
+}
+
+li
+{
+  margin-left: 2em;
+  padding-left: 1em;
+}
+
+.settings
+{
+  margin: 0px;
+  padding: 25px 25px;
+  background: #444;
+  color: #fff;
+}
+
+.settings h1
+{
+  font-variant: small-caps;
+  margin: 1em 0px;
+}
+
+.settings > :first-child
+{
+  margin-top: 0px !important;
+}
+
+.settings > :last-child
+{
+  margin-bottom: 0px !important;
+}
+
+.settings p
+{
+  margin: 0.5em 0px;
+}
+
+.settings span[contenteditable=true]
+{
+  border-bottom: 1px solid hsl(90, 100%, 75%);
+  display: inline-block;
+  min-width: 3ex;
+}
+
+.settings span[contenteditable=true]::before
+{
+  /* Add a zero width space, makes sure the span has a height. */
+  content: '\200B';
+}
+
+.settings div[contenteditable=true]
+{
+  margin-left: 2em;
+  border-left: 1px solid hsl(90, 100%, 75%);
+  padding-left: 1ex;
+}
+
+.settings [contenteditable=true], .settings span.checkbox,
+.settings span.option
+{
+  color: hsl(90, 100%, 75%);
+}
+
+.settings span.checkbox, .settings span.option, .settings .button
+{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.settings span.checkbox, .settings span.option
+{
+  cursor: pointer;
+}
+
+.settings span.checkbox > span, .settings span.option > span
+{
+  visibility: hidden;
+}
+
+.settings span.checkbox.selected > span, .settings span.option.selected > span
+{
+  visibility: visible;
+}
+
+.settings .button
+{
+  cursor: pointer;
+  color: #fff;
+  text-transform: uppercase;
+  background: hsl(90, 100%, 25%);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0px 1em;
+  -webkit-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+  -moz-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+  filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
+}
+
+.settings .button:first-child
+{
+  margin-left: 0px;
+}
+
+.settings .button:not(.disabled):active
+{
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+
+.settings .button.disabled
+{
+  background: hsl(90, 25%, 25%);
+}
+
+.settings .dots
+{
+  border-bottom: 1pt solid #fff;
+}
+
+.settings .invalid
+{
+  color: hsl(0, 100%, 75%);
+}
+
+#worksheet .dots
+{
+  border-bottom: 1pt solid #888;
+}
+
+#worksheet .entryspace
+{
+  display: inline-block;
+  width: 3ex;
+  padding: 0px;
+  margin: 0px;
+}
+
+#worksheet .answer
+{
+  display: none;
+}
+
+#worksheet.showanswers .answerreplacement
+{
+  visibility: hidden;
+}
+
+#worksheet.showanswers .answer
+{
+  position: absolute;
+  display: inline;
+}
+
+#worksheet
+{
+  font-size: 14pt;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#worksheet > .page
+{
+  page-break-after: always;
+  break-after: page;
+  margin: 1em;
+}
+
+#worksheet > .page p
+{
+  margin: 1em 0px;
+}
+
+#worksheet > .page table
+{
+  margin: 2em 0px 0px;
+}
+
+#worksheet > .page > .container
+{
+  display: inline-block;
+  padding: 25px 25px;
+  background: #fff;
+  box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+}
+
+#worksheet > .page > .container > :first-child
+{
+  margin-top: 0px !important;
+}
+
+#worksheet > .page > .container > :last-child
+{
+  margin-bottom: 0px !important;
+}
+
+#worksheet table
+{
+  border-collapse: collapse;
+}
+
+#worksheet td
+{
+  padding: 0.5ex 0.25ex;
+}
+
+#worksheet td.number
+{
+  text-align: right;
+}
+
+#worksheet td.space
+{
+  width: 4ex;
+}
+
+#worksheet tr.space
+{
+  height: 1em;
+}
+
+.overlay
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: auto;
+}
+
+.settings .highlightable
+{
+  transition: background 1s;
+}
+
+.settings .highlightable.highlight
+{
+  background: hsl(45, 40%, 27%);
+}
+
+
+@media print
+{
+  @page
+  {
+    margin: 0px;
+    padding: 2cm;
+  }
+
+  .settings
+  {
+    display: none;
+  }
+
+  html, body
+  {
+    background: inherit;
+  }
+
+  #worksheet
+  {
+    display: block;
+  }
+
+  #worksheet > .page
+  {
+    text-align: center;
+  }
+
+  #worksheet > .page > .container
+  {
+    text-align: left;
+  }
+
+  #worksheet > .page > .container
+  {
+    box-shadow: none;
+  }
+}
+
+/* vim: sts=2:sw=2:et
+ */

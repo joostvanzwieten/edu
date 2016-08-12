@@ -1,0 +1,17 @@
+#! /bin/sh
+
+for size in 16 32 48 64 144 196; do
+  rsvg-convert --format png --width $size --height $size icon.svg > tmp-icon-$size.png
+done
+convert -bordercolor white -border 0 \
+  \( tmp-icon-16.png \) \
+  \( tmp-icon-32.png \) \
+  \( tmp-icon-48.png \) \
+  \( tmp-icon-64.png \) \
+  \( tmp-icon-144.png \) \
+  \( tmp-icon-196.png \) \
+  icon.ico
+
+for size in 16 32 48 64 144 196; do
+  rm tmp-icon-$size.png
+done

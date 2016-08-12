@@ -1,0 +1,162 @@
+<?xml version='1.0' standalone='no'?>
+<svg width='144' height='144' viewBox='0 0 144 144' version='1.1'
+    xmlns='http://www.w3.org/2000/svg'>
+  <!-- page -->
+  <g transform='translate(72, 72)'>
+    <path fill='#fff' stroke='#000' stroke-width='2'
+      d='M -52 -70 L 36 -70 L 52 -54 L 52 70 L -52 70 Z'/>
+    <path fill='none' stroke='#000' stroke-width='2'
+      d='M 36 -70 L 36 -54 L 52 -54'/>
+  </g>
+  <!-- exercises -->
+  <g transform='translate(72, 22) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0)'>
+      <line x1='-10' x2='10' y1='0' y2='0' stroke='#000' stroke-width='4'/>
+      <line x1='0' x2='0' y1='-10' y2='10' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+  <g transform='translate(72, 42) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0)'>
+      <line x1='-10' x2='10' y1='0' y2='0' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+  <g transform='translate(72, 62) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0) rotate(45)'>
+      <line x1='-10' x2='10' y1='0' y2='0' stroke='#000' stroke-width='4'/>
+      <line x1='0' x2='0' y1='-10' y2='10' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+  <g transform='translate(72, 82) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0)'>
+      <circle cx='0' cy='-5' r='3'/>
+      <circle cx='0' cy='5' r='3'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+  <g transform='translate(72, 102) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0)'>
+      <line x1='-10' x2='10' y1='0' y2='0' stroke='#000' stroke-width='4'/>
+      <line x1='0' x2='0' y1='-10' y2='10' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+  <g transform='translate(72, 122) scale(0.4, 0.4)'>
+    <g transform='translate(-80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(-40,0)'>
+      <line x1='-10' x2='10' y1='0' y2='0' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(0,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+    <g transform='translate(40,0)'>
+      <line x1='-10' x2='10' y1='-5' y2='-5' stroke='#000' stroke-width='4'/>
+      <line x1='-10' x2='10' y1='5' y2='5' stroke='#000' stroke-width='4'/>
+    </g>
+    <g transform='translate(80,15)' fill='#000' stroke='none'>
+      <circle cx='-10' cy='0' r='2'/>
+      <circle cx=  '0' cy='0' r='2'/>
+      <circle cx= '10' cy='0' r='2'/>
+    </g>
+  </g>
+</svg>
+<!-- vim: ts=2:sts=2:sw=2:et
+  -->
