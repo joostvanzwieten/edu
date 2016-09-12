@@ -198,7 +198,7 @@ li
 
 #worksheet > .page table
 {
-  margin: 2em 0px 0px;
+  margin: 2em auto 0px;
 }
 
 #worksheet > .page > .container
