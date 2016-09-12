@@ -141,6 +141,11 @@ li
   color: hsl(0, 100%, 75%);
 }
 
+#headertext
+{
+  font-size: 100%;
+}
+
 #worksheet .dots
 {
   border-bottom: 1pt solid #888;
