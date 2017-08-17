@@ -70,7 +70,7 @@ body.red
 .clock .hour-button,
 .clock .minute-button
 {
-  transition: 0.2s;
+  transition: stroke 0.2s, fill 0.2s;
 }
 .clock.set-hour .hour-hand,
 .clock.set-minute .minute-hand,
