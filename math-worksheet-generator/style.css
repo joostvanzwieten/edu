@@ -105,10 +105,10 @@ li
   color: #fff;
   text-transform: uppercase;
   background: hsl(90, 100%, 25%);
-  border-radius: 5px;
+  border-radius: 2px;
   display: inline-block;
-  padding: 0.5em 1em;
-  margin: 0px 1em;
+  padding: 0.7em 1.5em;
+  margin: 5px;
   -webkit-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
   -moz-filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
   filter: drop-shadow(2px 2px 5px hsla(0, 0%, 0%, 0.5));
